@@ -1,6 +1,14 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Navbar = () => {
+    const { setSearch } = useContext(AuthContext);
+
+    const handleSearch = (event) => {
+        const value = event.target.value;
+        setSearch(value);
+    }
     return (
         <nav className="bg-gray-800">
             <div className="w-11/12 mx-auto p-4 flex flex-col md:flex-row items-center justify-between">
@@ -10,7 +18,7 @@ const Navbar = () => {
                 {/* Right side: Search, Filter, Sorting */}
                 <div className="flex flex-col md:flex-row md:w-2/3 items-center justify-between">
                     {/* Search Bar */}
-                    <input
+                    <input onChange={handleSearch}
                         type="text"
                         placeholder="Search..."
                         className="mb-4 md:mb-0 md:mr-4 p-2 w-full md:w-auto rounded-md"

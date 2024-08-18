@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ProductCard from "./ProductCard";
 import axios from "axios";
 import Loading from "../Loading/Loading";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Products = () => {
+    const { search } = useContext(AuthContext);
     const [allproducts, setAllproducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     axios.get(`https://fakestoreapi.com/products`)
         .then(res => {
-            setAllproducts(res.data);
             setLoading(false);
+            const products = res.data;
+            const singProd = products.filter(prod => prod.title.includes(search));
+            setAllproducts(singProd);
         });
 
     return (

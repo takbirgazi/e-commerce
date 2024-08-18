@@ -4,11 +4,13 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Fragment, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
-    const { image, title, price, rating, description } = product;
+    const { id, image, title, price, rating, description } = product;
     const [open, setOpen] = useState(false);
     const [scroll, setScroll] = useState('paper');
+    const navigate = useNavigate();
 
     const handleClickOpen = (scrollType) => () => {
         setOpen(true);
@@ -18,6 +20,9 @@ const ProductCard = ({ product }) => {
     const handleClose = () => {
         setOpen(false);
     };
+    const handleSingleProduct = (id) => {
+        navigate(`/singleProduct/${id}`);
+    }
 
     const descriptionElementRef = useRef(null);
     useEffect(() => {
@@ -77,7 +82,7 @@ const ProductCard = ({ product }) => {
 
                                 <DialogActions>
                                     <div className='cursor-pointer font-semibold text-blue-500 mr-5' onClick={handleClose}>Cancel</div>
-                                    <div className='cursor-pointer font-bold text-blue-500' onClick={handleClose}>${price}</div>
+                                    <div className='cursor-pointer font-bold text-blue-500' onClick={()=>handleSingleProduct(id)}>${price}</div>
                                 </DialogActions>
                             </Dialog>
                         </Fragment>

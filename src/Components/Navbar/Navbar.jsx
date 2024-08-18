@@ -1,10 +1,11 @@
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
     return (
         <nav className="bg-gray-800">
             <div className="w-11/12 mx-auto p-4 flex flex-col md:flex-row items-center justify-between">
                 {/* Website Name */}
-                <div className="text-white font-bold text-lg md:w-1/3 text-center md:text-left mb-4 md:mb-0">E-Commerce </div>
+                <div className="text-white font-bold text-lg md:w-1/3 text-center md:text-left mb-4 md:mb-0"> <NavLink to="/">E-Commerce </NavLink> </div>
 
                 {/* Right side: Search, Filter, Sorting */}
                 <div className="flex flex-col md:flex-row md:w-2/3 items-center justify-between">

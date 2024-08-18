@@ -15,7 +15,8 @@ const router = createBrowserRouter([
                 element: <Home></Home>,
             },
             {
-                path: "/singleProduct",
+                path: "/singleProduct/:id",
+                loader: () => fetch(`https://fakestoreapi.com/products`),
                 element: <SingleProduct></SingleProduct>,
             }
         ]

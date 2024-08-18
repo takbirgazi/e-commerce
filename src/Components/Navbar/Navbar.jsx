@@ -30,7 +30,7 @@ const Navbar = () => {
                         <option value="descending">Descending</option>
                     </select>
                 </div>
-           </div>
+            </div>
         </nav>
     );
 };

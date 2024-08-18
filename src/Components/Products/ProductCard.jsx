@@ -74,7 +74,7 @@ const ProductCard = ({ product }) => {
                                 <div className='p-4'>
                                     {description}
                                 </div>
-                              
+
                                 <DialogActions>
                                     <div className='cursor-pointer font-semibold text-blue-500 mr-5' onClick={handleClose}>Cancel</div>
                                     <div className='cursor-pointer font-bold text-blue-500' onClick={handleClose}>${price}</div>

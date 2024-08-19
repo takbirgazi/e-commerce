@@ -5,11 +5,13 @@ import Loading from "../Loading/Loading";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Products = () => {
-    const { search, sortValue } = useContext(AuthContext);
+    const { search, sortValue, categoryValue } = useContext(AuthContext);
     const [allproducts, setAllproducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    axios.get(`https://fakestoreapi.com/products`)
+    const getAPI = categoryValue ? `https://fakestoreapi.com/products/category/${categoryValue}` : `https://fakestoreapi.com/products`;
+
+    axios.get(getAPI)
         .then(res => {
             setLoading(false);
             const products = res.data;
@@ -19,7 +21,7 @@ const Products = () => {
                     const sortProduct = sortProducts.sort((a, b) => (a.price - b.price));
                     const singProd = sortProduct.filter(prod => prod.title.includes(search))
                     setAllproducts(singProd);
-                } else if (sortValue == "highToLow") { 
+                } else if (sortValue == "highToLow") {
                     const sortProducts = [...products];
                     const sortProduct = sortProducts.sort((a, b) => (b.price - a.price))
                     const singProd = sortProduct.filter(prod => prod.title.includes(search))

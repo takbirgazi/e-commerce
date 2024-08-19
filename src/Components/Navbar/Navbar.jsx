@@ -1,9 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
+import axios from "axios";
 
 const Navbar = () => {
-    const { setSearch, setSortValue } = useContext(AuthContext);
+    const { setSearch, setSortValue, setCategoryValue } = useContext(AuthContext);
+    const [categories, setCategories] = useState([]);
+
+    axios.get(`https://fakestoreapi.com/products/categories`)
+        .then(res => {
+            const allCategories = res.data;
+            setCategories(allCategories);
+        })
 
     const handleSearch = (event) => {
         const value = event.target.value;
@@ -13,6 +21,11 @@ const Navbar = () => {
         const value = event.target.value;
         setSortValue(value);
     }
+    const handlerFilter = (event) => {
+        const value = event.target.value;
+        setCategoryValue(value);
+    }
+    
     return (
         <nav className="bg-gray-800">
             <div className="w-11/12 mx-auto p-4 flex flex-col md:flex-row items-center justify-between">
@@ -29,11 +42,11 @@ const Navbar = () => {
                     />
 
                     {/* Filter Option */}
-                    <select className="mb-4 md:mb-0 md:mr-4 p-2 w-full md:w-auto rounded-md">
-                        <option value="">Filter</option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
+                    <select onChange={handlerFilter} defaultValue="category" className="mb-4 md:mb-0 md:mr-4 p-2 w-full md:w-auto rounded-md">
+                        <option value="category" disabled>Category</option>
+                        {
+                            categories.map(category => <option key={category} value={category}>{category}</option>)
+                        }
                     </select>
 
                     {/* Sorting Option */}

@@ -5,10 +5,13 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
     const [search, setSearch] = useState('');
+    const [sortValue, setSortValue] = useState('');
 
     const authInfo = {
         search,
         setSearch,
+        sortValue,
+        setSortValue,
     }
     return (
         <AuthContext.Provider value={authInfo}>

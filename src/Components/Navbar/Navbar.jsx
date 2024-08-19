@@ -3,11 +3,15 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 
 const Navbar = () => {
-    const { setSearch } = useContext(AuthContext);
+    const { setSearch, setSortValue } = useContext(AuthContext);
 
     const handleSearch = (event) => {
         const value = event.target.value;
         setSearch(value);
+    }
+    const handlerSort = (event) => {
+        const value = event.target.value;
+        setSortValue(value);
     }
     return (
         <nav className="bg-gray-800">
@@ -33,10 +37,10 @@ const Navbar = () => {
                     </select>
 
                     {/* Sorting Option */}
-                    <select className="p-2 w-full md:w-auto rounded-md">
-                        <option value="">Sort By</option>
-                        <option value="ascending">Ascending</option>
-                        <option value="descending">Descending</option>
+                    <select onChange={handlerSort} defaultValue='sort' className="p-2 w-full md:w-auto rounded-md">
+                        <option value="sort" disabled>Sort By</option>
+                        <option value="lowToHigh">Low to High</option>
+                        <option value="highToLow">High to Low</option>
                     </select>
                 </div>
             </div>
